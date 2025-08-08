@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Opportunité de Travail à Temps Partiel - Liberté Financière</title>
+    <style>
+        :root {
+            --primary-accent-hue: #FFD700;
+            --secondary-accent-hue: #003366;
+            --tertiary-accent-hue: #004080;
+            --quaternary-accent-hue: #FFA500;
+            --neutral-background-primary: #FFFFFF;
+            --neutral-background-secondary: #F8F9FA;
+            --text-color-primary: #2D3748;
+            --text-color-secondary: #4A5568;
+            --gradient-primary: linear-gradient(135deg, var(--primary-accent-hue), var(--quaternary-accent-hue));
+            --gradient-secondary: linear-gradient(45deg, var(--secondary-accent-hue), var(--tertiary-accent-hue));
+            --shadow-elevation-low: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-elevation-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-elevation-high: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --animation-duration-fast: 0.2s;
+            --animation-duration-medium: 0.5s;
+            --animation-duration-slow: 1s;
+            --border-radius-small: 8px;
+            --border-radius-medium: 12px;
+            --border-radius-large: 20px;
+        }
+
+        .dark-theme-preference {
+            --neutral-background-primary: #1A202C;
+            --neutral-background-secondary: #2D3748;
+            --text-color-primary: #F7FAFC;
+            --text-color-secondary: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .root-container-wrapper {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-primary);
+            background: var(--neutral-background-primary);
+            overflow-x: hidden;
+        }
+
+        .hero-section-container {
+            background: var(--gradient-secondary);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-timer-container {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--primary-accent-hue);
+            border-radius: var(--border-radius-medium);
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-title-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-accent-hue);
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown-display-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .countdown-display-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+            
+            .countdown-time-unit {
+                padding: 10px 5px;
+            }
+            
+            .countdown-number-display {
+                font-size: 1.5rem;
+            }
+            
+            .countdown-label-text {
+                font-size: 0.7rem;
+            }
+        }
+
+        .countdown-time-unit {
+            background: var(--neutral-background-primary);
+            color: var(--secondary-accent-hue);
+            padding: 15px 10px;
+            border-radius: var(--border-radius-small);
+            text-align: center;
+            box-shadow: var(--shadow-elevation-low);
+        }
+
+        .countdown-number-display {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary-accent-hue);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .countdown-label-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--tertiary-accent-hue);
+            text-transform: uppercase;
+        }
+
+        .countdown-urgent-message {
+            font-size: 0.9rem;
+            color: var(--primary-accent-hue);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: subtle-float-animation var(--animation-duration-slow) ease-in-out infinite alternate;
+        }
+
+        .hero-primary-headline {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-secondary-description {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            margin-bottom: 30px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-section-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .feature-highlight-block {
+            background: var(--neutral-background-secondary);
+            border-radius: var(--border-radius-large);
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-elevation-medium);
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--animation-duration-fast) ease, box-shadow var(--animation-duration-fast) ease;
+        }
+
+        .feature-highlight-block:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-elevation-high);
+        }
+
+        .feature-highlight-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-secondary);
+        }
+
+        .section-primary-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--secondary-accent-hue);
+            position: relative;
+        }
+
+        .section-primary-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .content-paragraph-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-color-secondary);
+            line-height: 1.7;
+        }
+
+        .visual-content-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: var(--border-radius-medium);
+            box-shadow: var(--shadow-elevation-medium);
+            margin: 30px auto;
+            display: block;
+            transition: transform var(--animation-duration-medium) ease;
+        }
+
+        .visual-content-image:hover {
+            transform: scale(1.02);
+        }
+
+        .interactive-cta-button {
+            display: inline-block;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 18px 40px;
+            border-radius: var(--border-radius-medium);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 20px auto;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-elevation-medium);
+            transition: all var(--animation-duration-fast) ease;
+            position: relative;
+            overflow: hidden;
+            animation: pulse-breathing-effect 2s ease-in-out infinite;
+        }
+
+        .interactive-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left var(--animation-duration-medium) ease;
+        }
+
+        .interactive-cta-button:hover::before {
+            left: 100%;
+        }
+
+        .interactive-cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-elevation-high);
+        }
+
+        .benefits-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .benefit-item-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius-medium);
+            box-shadow: var(--shadow-elevation-low);
+            border-left: 4px solid var(--secondary-accent-hue);
+            transition: all var(--animation-duration-fast) ease;
+        }
+
+        .benefit-item-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-elevation-medium);
+        }
+
+        .benefit-number-indicator {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .floating-whatsapp-widget {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all var(--animation-duration-fast) ease;
+            animation: gentle-breathing-effect 3s ease-in-out infinite;
+        }
+
+        .whatsapp-icon-container {
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-elevation-medium);
+            position: relative;
+        }
+
+        .whatsapp-notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--quaternary-accent-hue);
+            color: #FF0000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            animation: bounce-jump-effect 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce-jump-effect {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .sticky-bottom-cta-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--gradient-primary);
+            padding: 15px 20px;
+            z-index: 999;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .sticky-cta-button-extended {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            display: block;
+            background: var(--secondary-accent-hue);
+            color: white;
+            padding: 18px 30px;
+            border-radius: var(--border-radius-medium);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-elevation-medium);
+            animation: gentle-breathing-effect 3s ease-in-out infinite;
+            transition: all var(--animation-duration-fast) ease;
+        }
+
+        .sticky-cta-button-extended:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-elevation-high);
+        }
+
+        .risk-disclosure-section {
+            background: #FEF2F2;
+            border: 2px solid #FCA5A5;
+            border-radius: var(--border-radius-medium);
+            padding: 25px;
+            margin: 40px 0;
+        }
+
+        .risk-warning-title {
+            color: #DC2626;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-legal-section {
+            background: var(--neutral-background-secondary);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .legal-links-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .legal-link-item {
+            color: var(--secondary-accent-hue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--animation-duration-fast) ease;
+        }
+
+        .legal-link-item:hover {
+            color: var(--primary-accent-hue);
+        }
+
+        @keyframes pulse-breathing-effect {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes gentle-breathing-effect {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes subtle-float-animation {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .content-section-wrapper {
+                padding: 40px 15px;
+            }
+            
+            .feature-highlight-block {
+                padding: 25px;
+                margin: 25px 0;
+            }
+            
+            .benefits-grid-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .floating-whatsapp-widget {
+                right: 15px;
+            }
+            
+            .whatsapp-icon-container {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .sticky-bottom-cta-container {
+                padding: 12px 15px;
+            }
+        }
+
+        .dark-theme-preference .feature-highlight-block {
+            background: var(--neutral-background-secondary);
+        }
+
+        .dark-theme-preference .benefit-item-card {
+            background: var(--neutral-background-secondary);
+            color: var(--text-color-primary);
+        }
+    </style>
+</head>
+<body class="root-container-wrapper">
+    <header class="hero-section-container">
+        <h1 class="hero-primary-headline">Une seule heure par jour pour rendre votre temps plus précieux</h1>
+        <p class="hero-secondary-description">Commencez votre voyage vers la liberté financière !</p>
+        
+        <div class="countdown-timer-container">
+            <p class="countdown-title-text">⏰ Offre limitée dans le temps !</p>
+            <div class="countdown-display-grid">
+                <div class="countdown-time-unit">
+                    <div class="countdown-number-display" id="countdown-days">02</div>
+                    <div class="countdown-label-text">Jours</div>
+                </div>
+                <div class="countdown-time-unit">
+                    <div class="countdown-number-display" id="countdown-hours">00</div>
+                    <div class="countdown-label-text">Heures</div>
+                </div>
+                <div class="countdown-time-unit">
+                    <div class="countdown-number-display" id="countdown-minutes">00</div>
+                    <div class="countdown-label-text">Minutes</div>
+                </div>
+                <div class="countdown-time-unit">
+                    <div class="countdown-number-display" id="countdown-seconds">00</div>
+                    <div class="countdown-label-text">Secondes</div>
+                </div>
+            </div>
+            <p class="countdown-urgent-message">🔥 Ne manquez pas cette opportunité unique !</p>
+        </div>
+    </header>
+
+    <main class="content-section-wrapper">
+        <section class="feature-highlight-block">
+            <h2 class="section-primary-title">Une opportunité de travail à temps partiel unique !</h2>
+            <p class="content-paragraph-text">C'est une opportunité de travail à temps partiel "sans vendre de produits, sans faire de promotion" !</p>
+            <p class="content-paragraph-text">Cela semble incroyable ? Mais c'est exactement le nouveau mode de travail à temps partiel en ligne que nous vous proposons ! Avec seulement un téléphone ou un ordinateur, quelques clics simples, vous pouvez facilement gagner de l'argent depuis chez vous.</p>
+            <img src="img/1.jpg" alt="Opportunité de travail" class="visual-content-image">
+            <div style="text-align: center;">
+                <button class="interactive-cta-button" onclick="k2()">Commencez votre voyage vers des revenus potentiels</button>
+            </div>
+        </section>
+
+        <section class="feature-highlight-block">
+            <h2 class="section-primary-title">Pourquoi ce travail est-il différent ?</h2>
+            <p class="content-paragraph-text">Votre travail n'est pas de vendre des produits ou de faire de la publicité, mais d'aider nos supermarchés partenaires à augmenter la popularité de leurs produits.</p>
+            <p class="content-paragraph-text">En termes simples : suivez les instructions, cliquez sur les liens, ajoutez les produits au panier, sans achat nécessaire et sans frais.</p>
+        </section>
+
+        <section class="feature-highlight-block">
+            <h2 class="section-primary-title">Pas de piège, juste des opérations simples</h2>
+            <p class="content-paragraph-text">Aucune compétence professionnelle requise, aucun besoin d'apprendre des processus complexes. Si vous savez utiliser un téléphone ou un ordinateur, vous pouvez le faire.</p>
+            <img src="img/2.jpg" alt="Travail simple" class="visual-content-image">
+            <div style="text-align: center;">
+                <button class="interactive-cta-button" onclick="k2()">Laissez le temps créer de la valeur pour vous</button>
+            </div>
+        </section>
+
+        <section class="feature-highlight-block">
+            <h2 class="section-primary-title">Pourquoi ce travail vaut-il la peine d'être essayé ?</h2>
+            <div class="benefits-grid-container">
+                <div class="benefit-item-card">
+                    <span class="benefit-number-indicator">1</span>
+                    <h3>Seulement 1 heure par jour, revenus jusqu'à 300 euros !</h3>
+                    <p>Les emplois à temps partiel traditionnels nécessitent un investissement à long terme, mais dans notre équipe, nous croyons que l'efficacité est la clé. Utilisez votre temps libre pour gagner des récompenses généreuses facilement.</p>
+                </div>
+                <div class="benefit-item-card">
+                    <span class="benefit-number-indicator">2</span>
+                    <h3>Gagnez immédiatement, sans attendre le salaire !</h3>
+                    <p>Nous payons immédiatement sur votre compte par virement bancaire. Cela signifie que vous pouvez recevoir votre rémunération à tout moment, sans attendre la fin du mois.</p>
+                </div>
+                <div class="benefit-item-card">
+                    <span class="benefit-number-indicator">3</span>
+                    <h3>Aucun investissement requis, zéro risque !</h3>
+                    <p>Pas besoin de payer de caution, d'acheter des produits ou d'investissement initial. Suivez simplement les instructions pour accomplir les tâches et obtenez une vraie commission.</p>
+                </div>
+                <div class="benefit-item-card">
+                    <span class="benefit-number-indicator">4</span>
+                    <h3>Flexible et libre, travaillez n'importe où, n'importe quand !</h3>
+                    <p>Que vous soyez mère au foyer, étudiant, ou quelqu'un qui veut gagner de l'argent supplémentaire pendant son temps libre, ce travail s'adapte parfaitement à votre emploi du temps quotidien.</p>
+                </div>
+            </div>
+            <img src="img/3.jpg" alt="Avantages du travail" class="visual-content-image">
+            <div style="text-align: center;">
+                <button class="interactive-cta-button" onclick="k2()">Découvrez comment augmenter vos revenus</button>
+            </div>
+        </section>
+
+        <section class="feature-highlight-block">
+            <h2 class="section-primary-title">Comment ça marche ?</h2>
+            <h3 style="color: var(--secondary-accent-hue); margin-bottom: 15px;">Connectez-vous à la plateforme de tâches :</h3>
+            <p class="content-paragraph-text">Nous vous fournirons une plateforme de tâches exclusive, les instructions de tâches sont claires en un coup d'œil.</p>
+            
+            <h3 style="color: var(--secondary-accent-hue); margin-bottom: 15px;">Effectuez des opérations simples :</h3>
+            <p class="content-paragraph-text">Suivez les instructions, ajoutez les produits spécifiés au panier, sans acheter de produits et sans générer de frais.</p>
+        </section>
+
+        <section class="feature-highlight-block">
+            <h2 class="section-primary-title">Nos engagements :</h2>
+            <p class="content-paragraph-text"><strong>Aucun frais caché :</strong> De l'inscription à l'achèvement des tâches, vous n'avez aucun frais à payer.</p>
+            <p class="content-paragraph-text"><strong>Protection des données :</strong> Vos informations personnelles seront strictement protégées, utilisées uniquement pour le règlement des tâches.</p>
+            <img src="img/4.jpg" alt="Nos engagements" class="visual-content-image">
+            <div style="text-align: center;">
+                <button class="interactive-cta-button" onclick="k2()">Découvrez comment augmenter vos revenus</button>
+            </div>
+        </section>
+
+        <section class="feature-highlight-block">
+            <h2 class="section-primary-title">Rejoignez-nous immédiatement et commencez votre voyage de travail à temps partiel facile !</h2>
+            <p class="content-paragraph-text" style="text-align: center; font-size: 1.2rem; font-weight: 600;">Cliquez sur le bouton ci-dessous pour vous inscrire immédiatement</p>
+            <div style="text-align: center;">
+                <button class="interactive-cta-button" onclick="k2()" style="font-size: 1.3rem; padding: 25px 50px;">Commencer maintenant</button>
+            </div>
+        </section>
+
+        <section class="risk-disclosure-section">
+            <h3 class="risk-warning-title">
+                ⚠️ Avertissement important sur les risques
+            </h3>
+            <p style="color: #7F1D1D; line-height: 1.6;">
+                Concernant les opportunités de travail à temps partiel, doivent être conformes à la politique Google. Toute opportunité d'emploi comporte des risques potentiels. Veuillez évaluer soigneusement vos capacités personnelles et votre situation financière avant de participer. Les revenus mentionnés sont à titre informatif uniquement et les résultats réels peuvent varier selon les circonstances individuelles. Nous vous encourageons à faire preuve de prudence et à rechercher des conseils professionnels si nécessaire.
+            </p>
+        </section>
+    </main>
+
+    <div class="floating-whatsapp-widget" onclick="k2()">
+        <div class="whatsapp-icon-container">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.051 3.488"/>
+            </svg>
+            <div class="whatsapp-notification-badge">1</div>
+        </div>
+    </div>
+
+    <div class="sticky-bottom-cta-container">
+        <button class="sticky-cta-button-extended" onclick="k2()">
+            🚀 Commencer votre voyage vers la liberté financière
+        </button>
+    </div>
+
+    <footer class="footer-legal-section">
+        <p style="color: var(--text-color-secondary); margin-bottom: 15px;">
+            Cette page est conforme aux politiques financières de Google et aux réglementations en vigueur.
+        </p>
+        <div class="legal-links-container">
+            <a  class="legal-link-item" target="_blank">Politique de Confidentialité</a>
+            <a  class="legal-link-item" target="_blank">Conditions d'Utilisation</a>
+        </div>
+        <p style="color: var(--text-color-secondary); margin-top: 20px; font-size: 0.9rem;">
+            © 2024 Opportunité de Travail à Temps Partiel. Tous droits réservés.
+        </p>
+    </footer>
+
+    <script>
+        // Dark mode detection and application
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark-theme-preference');
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark-theme-preference');
+            } else {
+                document.documentElement.classList.remove('dark-theme-preference');
+            }
+        });
+
+        // WhatsApp redirection function
+        function k2() {
+            window.open('https://wa.me/1111111111', '_blank');
+        }
+
+        // Enhanced scroll effects for better user experience
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-section-container');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply fade-in animation to feature blocks
+        document.querySelectorAll('.feature-highlight-block').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add smooth scrolling behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Countdown Timer Implementation
+        let countdownTimeInSeconds = 2 * 24 * 60 * 60; // 2 days in seconds
+        
+        function updateCountdownDisplay() {
+            const days = Math.floor(countdownTimeInSeconds / (24 * 60 * 60));
+            const hours = Math.floor((countdownTimeInSeconds % (24 * 60 * 60)) / (60 * 60));
+            const minutes = Math.floor((countdownTimeInSeconds % (60 * 60)) / 60);
+            const seconds = countdownTimeInSeconds % 60;
+            
+            document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
+        }
+        
+        function startCountdownTimer() {
+            // Update display immediately
+            updateCountdownDisplay();
+            
+            // Decrease seconds every 1000ms
+            setInterval(() => {
+                if (countdownTimeInSeconds > 0) {
+                    countdownTimeInSeconds--;
+                    updateCountdownDisplay();
+                } else {
+                    // Reset countdown when it reaches 0
+                    countdownTimeInSeconds = 2 * 24 * 60 * 60;
+                    updateCountdownDisplay();
+                }
+            }, 1000);
+        }
+        
+        // Start countdown when page loads
+        startCountdownTimer();
+    </script>
+</body>
+</html>
