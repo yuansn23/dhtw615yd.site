@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Användarvillkor - FlexWork Sverige</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        'primary-dark': '#4A49C7'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .content-section {
+            margin-bottom: 2rem;
+        }
+        .content-section h2 {
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+        .content-section h3 {
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        .content-section p, .content-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        .content-section ul, .content-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+    <!-- Dark mode detection -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-primary">FlexWork Sverige</div>
+                <button onclick="window.history.back()" class="text-primary hover:text-primary-dark transition duration-300">
+                    ← Tillbaka
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <h1 class="text-3xl lg:text-4xl font-bold mb-8 text-center">Användarvillkor</h1>
+            
+            <div class="text-sm text-gray-600 dark:text-gray-400 mb-8 text-center">
+                Senast uppdaterad: December 2024
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">1. Acceptans av Villkor</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Genom att använda FlexWork Sveriges webbplats och tjänster ("Tjänsterna") accepterar du att vara bunden av dessa användarvillkor ("Villkoren"). Om du inte accepterar alla villkor ska du inte använda våra Tjänster.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Dessa Villkor utgör ett juridiskt bindande avtal mellan dig och FlexWork Sverige ("vi", "oss", "vår").
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">2. Beskrivning av Tjänster</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    FlexWork Sverige tillhandahåller en plattform som kopplar samman individer med distansarbets- och deltidsmöjligheter. Våra tjänster inkluderar:
+                </p>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Förmedling av arbetsmöjligheter inom marknadsföring och produktpromotion</li>
+                    <li>Utbildning och support för arbetsuppgifter</li>
+                    <li>Betalningshantering och resultatrapportering</li>
+                    <li>Kommunikationsplattform mellan användare och arbetsgivare</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">3. Registrering och Användarkonto</h2>
+                <h3 class="text-xl font-medium">3.1 Kontokrav</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    För att använda vissa funktioner måste du skapa ett konto. Du måste:
+                </p>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Vara minst 18 år gammal</li>
+                    <li>Tillhandahålla korrekt och fullständig information</li>
+                    <li>Uppdatera din information när den förändras</li>
+                    <li>Hålla dina inloggningsuppgifter säkra</li>
+                </ul>
+
+                <h3 class="text-xl font-medium">3.2 Kontosäkerhet</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Du är ansvarig för all aktivitet på ditt konto. Du måste omedelbart meddela oss om misstänkt obehörig användning av ditt konto.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">4. Användaransvar och Förpliktelser</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Som användare av våra Tjänster förbinder du dig att:
+                </p>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Utföra arbetsuppgifter professionellt och i god tro</li>
+                    <li>Följa alla instruktioner och riktlinjer som tillhandahålls</li>
+                    <li>Rapportera arbetsresultat ärligt och korrekt</li>
+                    <li>Respektera konfidentialitet och affärshemligheter</li>
+                    <li>Inte använda Tjänsterna för olagliga ändamål</li>
+                    <li>Inte störa eller försöka få obehörig åtkomst till våra system</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">5. Arbetsvillkor och Ersättning</h2>
+                <h3 class="text-xl font-medium">5.1 Arbetsmöjligheter</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Arbetsuppgifter tillhandahålls efter tillgänglighet och lämplighet. Vi garanterar inte kontinuerligt arbete eller specifika inkomstnivåer.
+                </p>
+
+                <h3 class="text-xl font-medium">5.2 Ersättning</h3>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Ersättning baseras på prestationer och utförd arbetsvolym</li>
+                    <li>Betalningar görs enligt angivna scheman</li>
+                    <li>Vi förbehåller oss rätten att justera ersättningsnivåer</li>
+                    <li>Skatter och avgifter är användarens ansvar</li>
+                </ul>
+
+                <h3 class="text-xl font-medium">5.3 Arbetstid</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Arbetstider är flexibla men användare förväntas uppfylla överenskomna åtaganden inom angivna tidsramar.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">6. Betalning och Avgifter</h2>
+                <h3 class="text-xl font-medium">6.1 Betalningsvillkor</h3>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Betalningar behandlas enligt våra publicerade scheman</li>
+                    <li>Betalningsmetoder kan variera och meddelas i förväg</li>
+                    <li>Minimigränser kan gälla för uttag</li>
+                    <li>Betalningar kan försenas vid tekniska problem eller verifiering</li>
+                </ul>
+
+                <h3 class="text-xl font-medium">6.2 Avgifter</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Vi förbehåller oss rätten att ta ut administrativa avgifter för vissa tjänster. Sådana avgifter kommer att kommuniceras tydligt innan de tillämpas.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">7. Immateriella Rättigheter</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Allt innehåll på vår plattform, inklusive men inte begränsat till text, grafik, logotyper, bilder och programvara, ägs av FlexWork Sverige eller våra licensgivare och skyddas av upphovsrätts- och varumärkeslagar.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Du får inte kopiera, distribuera, modifiera eller skapa härledda verk från vårt innehåll utan uttryckligt skriftligt tillstånd.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">8. Förbjudna Aktiviteter</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Du får inte använda våra Tjänster för att:
+                </p>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Bryta mot några lagar eller förordningar</li>
+                    <li>Trakassera, missbruka eller skada andra användare</li>
+                    <li>Skicka spam, virus eller skadlig kod</li>
+                    <li>Kringgå säkerhetsåtgärder</li>
+                    <li>Skapa falska konton eller identiteter</li>
+                    <li>Störa plattformens funktion</li>
+                    <li>Samla användardata utan tillstånd</li>
+                    <li>Använda automatiserade system utan tillstånd</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">9. Integritet och Databehandling</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Din integritet är viktig för oss. Vår behandling av personuppgifter regleras av vår Integritetspolicy, som utgör en integrerad del av dessa Villkor.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Genom att använda våra Tjänster samtycker du till insamling och användning av information enligt vår Integritetspolicy.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">10. Tjänsteändringar och Tillgänglighet</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Vi förbehåller oss rätten att:
+                </p>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Modifiera eller avbryta Tjänster när som helst</li>
+                    <li>Uppdatera dessa Villkor vid behov</li>
+                    <li>Tillfälligt stänga av Tjänster för underhåll</li>
+                    <li>Ändra funktioner och gränssnitt</li>
+                </ul>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Väsentliga ändringar kommer att meddelas i förväg när det är praktiskt möjligt.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">11. Kontouppsägning</h2>
+                <h3 class="text-xl font-medium">11.1 Uppsägning av Användare</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Du kan avsluta ditt konto när som helst genom att kontakta oss. Obestalda betalningar kommer att behandlas enligt våra standardprocedurer.
+                </p>
+
+                <h3 class="text-xl font-medium">11.2 Uppsägning av FlexWork Sverige</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Vi kan stänga av eller avsluta ditt konto om du:
+                </p>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Bryter mot dessa Villkor</li>
+                    <li>Använder Tjänsterna på ett olämpligt sätt</li>
+                    <li>Ägnar dig åt bedrägliga aktiviteter</li>
+                    <li>Inte använder ditt konto under en längre period</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">12. Ansvarsfriskrivning</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Våra Tjänster tillhandahålls "som de är" och "som tillgängliga". Vi gör inga garantier angående:
+                </p>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Kontinuerlig tillgänglighet av Tjänsterna</li>
+                    <li>Felfri funktion</li>
+                    <li>Specifika inkomstresultat</li>
+                    <li>Tillgänglighet av arbetsuppgifter</li>
+                    <li>Tredjepartstjänster eller innehåll</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">13. Ansvarsbegränsning</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    FlexWork Sveriges ansvar är begränsat till det maximala belopp som du har betalat oss under de senaste tolv månaderna. Vi ansvarar inte för:
+                </p>
+                <ul class="list-disc text-gray-700 dark:text-gray-300">
+                    <li>Indirekta, tillfälliga eller följdskador</li>
+                    <li>Förlust av vinster eller affärsmöjligheter</li>
+                    <li>Dataförlust</li>
+                    <li>Tredje parts handlingar</li>
+                    <li>Force majeure-händelser</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">14. Ersättning</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Du samtycker till att ersätta och hålla FlexWork Sverige skadeslös från alla anspråk, förluster och kostnader som uppstår från din användning av Tjänsterna eller brott mot dessa Villkor.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">15. Tillämplig Lag och Jurisdiktion</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Dessa Villkor regleras av svensk lag. Tvister ska i första hand lösas genom förhandling. Om detta inte lyckas ska tvister avgöras av svensk domstol.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">16. Avtalsvillkor</h2>
+                <h3 class="text-xl font-medium">16.1 Hela Avtalet</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Dessa Villkor, tillsammans med vår Integritetspolicy, utgör hela avtalet mellan dig och FlexWork Sverige.
+                </p>
+
+                <h3 class="text-xl font-medium">16.2 Skiljbarhet</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Om någon del av dessa Villkor bedöms vara ogiltig, fortsätter resterande delar att gälla.
+                </p>
+
+                <h3 class="text-xl font-medium">16.3 Ändringar</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Vi kan uppdatera dessa Villkor från tid till annan. Fortsatt användning efter ändringar innebär acceptans av de nya villkoren.
+                </p>
+
+                <h3 class="text-xl font-medium">16.4 Avstående</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Vårt underlåtande att verkställa någon rättighet eller bestämmelse utgör inte ett avstående från sådan rättighet.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="text-2xl font-semibold text-primary">17. Kontakt</h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Om du har frågor om dessa Användarvillkor kan du kontakta oss genom vår webbplats. Vi strävar efter att svara på alla förfrågningar inom rimlig tid.
+                </p>
+            </div>
+
+            <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg mt-8">
+                <p class="text-sm text-gray-600 dark:text-gray-400 text-center">
+                    Dessa användarvillkor träder i kraft från det datum du först använder våra tjänster. Genom att fortsätta använda FlexWork Sverige bekräftar du att du har läst, förstått och accepterat dessa villkor.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 dark:bg-gray-800 py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-600 dark:text-gray-400">© 2024 FlexWork Sverige. Alla rättigheter förbehållna.</p>
+        </div>
+    </footer>
+</body>
+</html>
