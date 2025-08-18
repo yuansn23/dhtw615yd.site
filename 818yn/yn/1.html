@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SparkCircle - Cerita Cintamu Dimulai Di Sini</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #b241c3;
+            --secondary-color: #ff6b6b;
+            --accent-color: #4ecdc4;
+            --dark-color: #292f36;
+            --light-color: #f7f7f7;
+            --online-color: #4CAF50;
+            --gradient-start: #36175E;
+            --gradient-end: #47226B;
+            --gradient-mid: #3A1965;
+            --text-light: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            width: 50%;
+            padding: 40px;
+            background: rgba(54, 23, 94, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 5;
+            animation: fadeInUp 1s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            z-index: 1;
+            animation: fadeInRight 1s ease-out;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ED3B70, #FC7CA2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .hero-text {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #ED3B70, #FC7CA2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(237, 59, 112, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(237, 59, 112, 0.6);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .btn:hover::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(to right, #25D366, #128C7E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .whatsapp-btn:hover {
+            background: linear-gradient(to right, #128C7E, #075E54);
+        }
+        
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+            position: relative;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #ED3B70, #FC7CA2);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .members {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .member-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(178, 65, 195, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .member-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .member-card:hover .member-img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 25px;
+        }
+        
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .online-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--online-color);
+            animation: pulse 2s infinite;
+        }
+        
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--online-color);
+            border-radius: 50%;
+            margin-right: 5px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        .member-quote {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+        
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .stat {
+            padding: 30px;
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+            animation-delay: calc(var(--order) * 0.2s);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ED3B70, #FC7CA2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .testimonial {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+            animation-delay: calc(var(--order) * 0.2s);
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(178, 65, 195, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+        }
+        
+        .testimonial img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+        
+        .how-it-works {
+            margin-top: 100px;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 40px 30px;
+            margin: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+            animation-delay: calc(var(--order) * 0.2s);
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(178, 65, 195, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, #ED3B70, #FC7CA2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(237, 59, 112, 0.4);
+        }
+        
+        .step h3 {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.4rem;
+        }
+        
+        .step p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .whatsapp-icon {
+            display: block;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .notification {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 25px;
+            height: 25px;
+            background-color: #FF5252;
+            color: white;
+            border-radius: 50%;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            animation: bounce 2s infinite;
+        }
+        
+        footer {
+            background: rgba(41, 17, 71, 0.8);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 30px;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .disclaimer {
+            font-size: 0.9rem;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Floating elements */
+        .floating-heart {
+            position: absolute;
+            opacity: 0.6;
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .heart-lg {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .heart-md {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .heart-sm {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .speech-bubble {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            padding: 30px;
+            color: var(--gradient-mid);
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            animation: float 4s ease-in-out infinite;
+            text-align: center;
+            min-width: 180px;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: 10%;
+            top: 25%;
+        }
+        
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: white;
+            border-bottom: 0;
+            margin-left: -20px;
+            margin-bottom: -20px;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateY(-50%) translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%) translateX(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-content {
+                width: 100%;
+                margin-top: 80px;
+            }
+            
+            .hero-image {
+                position: relative;
+                width: 100%;
+                transform: none;
+                top: 0;
+                margin-top: 40px;
+                display: none;
+            }
+            
+            .speech-bubble {
+                top: 100px;
+                right: 50px;
+                min-width: 120px;
+                min-height: 120px;
+                font-size: 0.9rem;
+                padding: 15px;
+                transform: scale(0.8);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .members, .testimonials {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+            
+            .whatsapp-float {
+                right: 20px;
+            }
+            
+            .speech-bubble {
+                display: none;
+            }
+            
+            .hero {
+                min-height: auto;
+                padding: 120px 0 60px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Reordering animations for staggered effect */
+        .stat:nth-child(1), .testimonial:nth-child(1), .step:nth-child(1) {
+            --order: 1;
+        }
+        
+        .stat:nth-child(2), .testimonial:nth-child(2), .step:nth-child(2) {
+            --order: 2;
+        }
+        
+        .stat:nth-child(3), .testimonial:nth-child(3), .step:nth-child(3) {
+            --order: 3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts -->
+    <svg class="floating-heart heart-lg" style="top: 15%; left: 10%;" viewBox="0 0 512 512" fill="#FF6B6B">
+        <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+    </svg>
+    <svg class="floating-heart heart-md" style="top: 40%; left: 5%;" viewBox="0 0 512 512" fill="white">
+        <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+    </svg>
+    <svg class="floating-heart heart-sm" style="top: 70%; left: 15%;" viewBox="0 0 512 512" fill="#FF6B6B">
+        <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+    </svg>
+    <svg class="floating-heart heart-md" style="top: 20%; right: 15%;" viewBox="0 0 512 512" fill="#FF6B6B">
+        <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+    </svg>
+    <svg class="floating-heart heart-sm" style="top: 60%; right: 5%;" viewBox="0 0 512 512" fill="white">
+        <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+    </svg>
+    
+    <!-- Speech bubble -->
+    <div class="speech-bubble">
+        Apakah Kamu<br>Menunggu<br>Cinta Sejati?
+    </div>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="logo">SparkCircle</div>
+                <h1 class="tagline">Cerita Cintamu Dimulai Di Sini</h1>
+                <p class="hero-text">Di SparkCircle, kami percaya setiap orang berhak bertemu dengan seseorang yang istimewa. Platform kami menyatukan para lajang dari seluruh Indonesia untuk membangun hubungan yang tulus, langgeng, dan nyata. Beri dirimu kesempatan untuk menciptakan kisah yang indah.</p>
+                <button class="btn whatsapp-btn" onclick="opensite()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.288.131.332.202.043.72.043.419-.101.824z"/>
+                    </svg>
+                    Mulai Sekarang
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Temui Singles Siap Menulis Kisah Indah</h2>
+            <div class="members">
+                <div class="member-card">
+                    <img src="https://www.upoaa.online/yn/img/1.jpg" alt="Ayu" class="member-img">
+                    <div class="member-info">
+                        <div class="member-name">
+                            Ayu
+                            <span class="online-status">
+                                <span class="online-dot"></span>
+                                Online
+                            </span>
+                        </div>
+                        <p class="member-quote">"Di lautan manusia ini, aku percaya ada seseorang yang akan membuat duniaku lebih indah. Mungkinkah itu kamu?"</p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <img src="https://www.upoaa.online/yn/img/2.jpg" alt="Putri" class="member-img">
+                    <div class="member-info">
+                        <div class="member-name">
+                            Putri
+                            <span class="online-status">
+                                <span class="online-dot"></span>
+                                Online
+                            </span>
+                        </div>
+                        <p class="member-quote">"Suka mencoba hal baru, lebih suka berpetualang dengan orang yang istimewa. Maukah kamu jadi yang istimewa untukku?"</p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <img src="https://www.upoaa.online/yn/img/3.jpg" alt="Dewi" class="member-img">
+                    <div class="member-info">
+                        <div class="member-name">
+                            Dewi
+                            <span class="online-status">
+                                <span class="online-dot"></span>
+                                Online
+                            </span>
+                        </div>
+                        <p class="member-quote">"Aku orang yang sederhana, suka tertawa, suka makan, dan tentu saja, lebih suka berbagi semua itu dengan orang yang tepat."</p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <img src="https://www.upoaa.online/yn/img/4.jpg" alt="Indah" class="member-img">
+                    <div class="member-info">
+                        <div class="member-name">
+                            Indah
+                            <span class="online-status">
+                                <span class="online-dot"></span>
+                                Online
+                            </span>
+                        </div>
+                        <p class="member-quote">"Aku menikmati kebebasan, tapi lebih berharap dalam perjalananku yang bebas, bisa bertemu seseorang yang berjalan berdampingan denganku."</p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <img src="https://www.upoaa.online/yn/img/5.jpg" alt="Sari" class="member-img">
+                    <div class="member-info">
+                        <div class="member-name">
+                            Sari
+                            <span class="online-status">
+                                <span class="online-dot"></span>
+                                Online
+                            </span>
+                        </div>
+                        <p class="member-quote">"Aku mungkin bukan orang yang paling istimewa, tapi aku bersedia menggunakan keistimewaanku untuk menjaga keunikanmu."</p>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <img src="https://www.upoaa.online/yn/img/6.jpg" alt="Lestari" class="member-img">
+                    <div class="member-info">
+                        <div class="member-name">
+                            Lestari
+                            <span class="online-status">
+                                <span class="online-dot"></span>
+                                Online
+                            </span>
+                        </div>
+                        <p class="member-quote">"Aku bisa sangat keren, bisa juga sangat imut, tapi yang paling ingin aku jadi adalah pengecualian di hatimu."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 60px;">
+                <p style="margin-bottom: 30px; font-size: 1.2rem; color: rgba(255, 255, 255, 0.9);">Saat ini kami memiliki 23.922 anggota di platform. Klik tombol untuk melihat lebih banyak profil. Jangan lewatkan kesempatanmu!</p>
+                <button class="btn whatsapp-btn" onclick="opensite()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.288.131.332.202.043.72.043.419-.101.824z"/>
+                    </svg>
+                    Lihat Lebih Banyak
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Tentang Kami</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <h3 style="color: white; margin-bottom: 30px; font-size: 2rem; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">Temukan TA yang Istimewa, Mulai dari Sini!</h3>
+                <p style="margin-bottom: 40px; font-size: 1.2rem; color: rgba(255, 255, 255, 0.9); line-height: 1.8;">Entah kamu mencari cinta sejati, sahabat, atau jodoh yang ditakdirkan, kami menyediakan platform kencan yang aman, hangat, dan nyata. Di sini, setiap pertemuan penuh kemungkinan, setiap kecocokan datang dari hati.</p>
+                <button class="btn whatsapp-btn" onclick="opensite()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.288.131.332.202.043.72.043.419-.101.824z"/>
+                    </svg>
+                    Gabung Sekarang
+                </button>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">23.922+</div>
+                    <div class="stat-label">Anggota Wanita</div>
+                </div>
+                
+                <div class="stat">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">Rata-rata Usia</div>
+                </div>
+                
+                <div class="stat">
+                    <div class="stat-number">19.821</div>
+                    <div class="stat-label">Online Sekarang</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Testimoni Pengguna</h2>
+            <h3 style="text-align: center; margin-bottom: 50px; color: white; font-size: 1.5rem; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">Saksikan kisah cinta indah mereka, berkat SparkCircle</h3>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <img src="https://www.upoaa.online/yn/img/b1.jpg" alt="Testimonial 1">
+                    <p>"Aku tak pernah menyangka pesan sederhana bisa mengubah hidupku. Mengirim pesan pada Julian hanya sekedar mencoba. Beberapa hari kemudian, perasaan kami berkembang pesat, dan tiga bulan kemudian bertemu di Lyon, seperti keajaiban. Kini, kami hidup bersama setiap hari. Terima kasih SparkCircle atas keajaiban ini."</p>
+                </div>
+                
+                <div class="testimonial">
+                    <img src="https://www.upoaa.online/yn/img/b2.jpg" alt="Testimonial 2">
+                    <p>"Berkat SparkCircle, kami melewati ribuan kilometer, dari virtual menjadi nyata. Sekarang, jarak dua kota hanya menambah kebahagiaan kami."</p>
+                </div>
+                
+                <div class="testimonial">
+                    <img src="https://www.upoaa.online/yn/img/b3.jpg" alt="Testimonial 3">
+                    <p>"Banyak aplikasi kencan dangkal membuatku kecewa, hingga aku menemukan SparkCircle. Di sini, aku bertemu Lucas, pasangan yang tulus dan perhatian. Kami berbagi nilai yang sama, hidup jadi lebih indah karenanya."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Cara Bergabung</h2>
+            <h3 style="text-align: center; margin-bottom: 50px; color: white; font-size: 1.5rem; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">Mulai perjalanan cintamu, bergabung dengan SparkCircle mudah dan cepat</h3>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Tambahkan kami di WhatsApp</h3>
+                    <p>Klik tombol WhatsApp di halaman ini untuk memulai percakapan</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Kirim Profil Anda</h3>
+                    <p>Isi nama, usia, kota, hobi, dan tipe pasangan ideal Anda... cepat dan rahasia!</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Dapatkan Kecocokan Pertama</h3>
+                    <p>Tim kami akan memilihkan pasangan yang sangat cocok dan tulus untuk Anda. Langkah selanjutnya, Anda yang menentukan!</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 70px;">
+                <button class="btn whatsapp-btn" onclick="opensite()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.288.131.332.202.043.72.043.419-.101.824z"/>
+                    </svg>
+                    Mulai Sekarang
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <div class="whatsapp-float">
+        <a href="#" class="whatsapp-icon" onclick="opensite(); return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="white">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.288.131.332.202.043.72.043.419-.101.824z"/>
+            </svg>
+            <span class="notification">1</span>
+        </a>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 20px; font-size: 2.5rem;">SparkCircle</div>
+            <p>Cerita Cintamu Dimulai Di Sini</p>
+            
+            <div class="disclaimer">
+                <h3 style="margin-bottom: 15px; color: white;">Pemberitahuan Kebijakan</h3>
+                <p>SparkCircle mematuhi kebijakan iklan Facebook dan TikTok. Kami tidak menjual produk terlarang atau berbahaya, tidak menggunakan konten dewasa yang tidak sesuai, dan tidak menggunakan bahasa yang mengandung diskriminasi. Semua konten kami ramah, positif, dan mempromosikan hubungan yang sehat dan saling menghormati. Platform ini untuk pengguna berusia 18+ tahun. Kami menghormati privasi Anda dan tidak membagikan informasi pribadi tanpa izin.</p>
+                <p style="margin-top: 15px;">© 2023 SparkCircle. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function opensite() {
+            window.open('https://line.me/ti/p/~username', '_blank');
+        }
+        
+        // Intersection Observer for animation on scroll
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            const animatedElements = document.querySelectorAll('.stat, .testimonial, .step');
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
