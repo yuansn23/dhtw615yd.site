@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI株式分析チャット</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        secondary: '#00D4AA',
+                        dark: '#0A0B14',
+                        darkCard: '#1A1B2E',
+                        lineGreen: '#00B900'
+                    },
+                    fontFamily: {
+                        'noto': ['Noto Sans JP', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%); }
+        .card-glow { box-shadow: 0 0 30px rgba(93, 92, 222, 0.1); }
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(93, 92, 222, 0.2); }
+        .chat-bubble-user { background: linear-gradient(135deg, #5D5CDE, #7C3AED); }
+        .chat-bubble-ai { background: linear-gradient(135deg, #00D4AA, #0891B2); }
+        .chat-bubble-ai-first { background: #00B900; }
+        .typing-indicator { animation: pulse 1.5s infinite; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+        .marketing-card { 
+            background: #00B900;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow { from { box-shadow: 0 0 10px rgba(0, 185, 0, 0.5); } to { box-shadow: 0 0 20px rgba(0, 185, 0, 0.8), 0 0 30px rgba(0, 185, 0, 0.6); } }
+        
+        /* 呼吸動畫 */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .breathe-animation {
+            animation: breathe 2s ease-in-out infinite;
+        }
+        
+        /* ボタン呼吸動畫 */
+        @keyframes buttonBreathe {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(93, 92, 222, 0.4);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 0 30px rgba(93, 92, 222, 0.8);
+            }
+        }
+        .button-breathe {
+            animation: buttonBreathe 2s ease-in-out infinite;
+        }
+
+        /* 待機エフェクト */
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-spinner {
+            animation: rotate 1s linear infinite;
+        }
+    </style>
+</head>
+<body class="gradient-bg text-white min-h-screen font-noto">
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-12 fade-in-up">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary to-secondary rounded-full mb-6 card-glow">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                AI株式分析チャット
+            </h1>
+            <p class="text-xl text-blue-200 mb-8">
+                あなたのAIアシスタントと株式について相談
+            </p>
+        </div>
+
+        <!-- ウェルカムカード -->
+        <div class="bg-darkCard rounded-2xl p-6 mb-8 card-glow fade-in-up">
+            <h2 class="text-2xl font-semibold mb-4 text-secondary">AI株式分析アシスタントへようこそ！</h2>
+            <p class="text-gray-300 leading-relaxed">
+                株式市場分析、投資戦略、リアルタイムデータに関するあらゆる情報をお気軽にお尋ねください。
+            </p>
+        </div>
+
+        <!-- 特徴機能 -->
+        <div class="mb-8 fade-in-up">
+            <h3 class="text-lg font-semibold mb-4 text-secondary">主な特徴：</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-primary/20 text-white border border-primary/30 px-3 py-1 rounded-full text-sm">株式分析</span>
+                <span class="bg-secondary/20 text-secondary border border-secondary/30 px-3 py-1 rounded-full text-sm">市場動向</span>
+                <span class="bg-primary/20 text-white border border-primary/30 px-3 py-1 rounded-full text-sm">ポートフォリオ提案</span>
+                <span class="bg-secondary/20 text-secondary border border-secondary/30 px-3 py-1 rounded-full text-sm">リスク評価</span>
+                <span class="bg-primary/20 text-white border border-primary/30 px-3 py-1 rounded-full text-sm">リアルタイム分析</span>
+                <span class="bg-secondary/20 text-secondary border border-secondary/30 px-3 py-1 rounded-full text-sm">AI予測モデル</span>
+                <span class="bg-primary/20 text-white border border-primary/30 px-3 py-1 rounded-full text-sm">技術指標</span>
+            </div>
+        </div>
+
+        <!-- 入力ボックスとチャット開始 -->
+        <div class="bg-darkCard rounded-2xl p-6 mb-8 card-glow fade-in-up">
+            <div class="space-y-4">
+                <input type="text" id="userQuestion" placeholder="株式に関するご質問をどうぞ..." 
+                       class="w-full bg-gray-700 text-white rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary">
+                <button id="startChatBtn" class="button-breathe bg-gradient-to-r from-primary to-secondary text-white font-semibold py-4 px-8 rounded-2xl text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 w-full">
+                    チャットを開始
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- チャットモーダル -->
+    <div id="chatModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-darkCard rounded-2xl w-full max-w-md h-[80vh] flex flex-col">
+                <!-- ヘッダー -->
+                <div class="flex items-center justify-between p-4 border-b border-gray-600">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white">AI株式アシスタント</h3>
+                        <p class="text-xs text-orange-400 flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            この質問は6,213人が閲覧しています
+                        </p>
+                    </div>
+                    <button id="closeChat" class="text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- チャットエリア -->
+                <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatArea">
+                    <!-- チャットメッセージがここに表示される -->
+                </div>
+                
+                <!-- 入力エリア -->
+                <div class="p-4 border-t border-gray-600">
+                    <div class="flex space-x-2">
+                        <input type="text" id="chatInput" placeholder="株式に関するご質問をどうぞ..." 
+                               class="flex-1 bg-gray-700 text-white rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button id="sendBtn" class="bg-primary text-white rounded-xl px-6 py-3 hover:bg-opacity-80 transition-colors">
+                            送信
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ダークモード設定
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        const chatModal = document.getElementById('chatModal');
+        const startChatBtn = document.getElementById('startChatBtn');
+        const closeChat = document.getElementById('closeChat');
+        const chatArea = document.getElementById('chatArea');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const userQuestion = document.getElementById('userQuestion');
+
+        // メッセージカウンター
+        let messageCount = 0;
+
+        // h2メソッド
+        function h2() {
+            window.open('https://www.qq.com', '_blank');
+        }
+
+        // チャットモーダルを開く
+        startChatBtn.addEventListener('click', () => {
+            const question = userQuestion.value.trim();
+            if (question) {
+                chatModal.classList.remove('hidden');
+                // メッセージカウンターをリセット
+                messageCount = 1;
+                // ユーザーの初期質問を表示
+                addMessage(question, true);
+                // 入力ボックスをクリア
+                userQuestion.value = '';
+                // AI応答をトリガー
+                aiAutoResponse();
+            }
+        });
+
+        // チャットモーダルを閉じる
+        closeChat.addEventListener('click', () => {
+            chatModal.classList.add('hidden');
+            chatArea.innerHTML = '';
+            messageCount = 0;
+        });
+
+        // メッセージ追加関数
+        function addMessage(content, isUser = false, isFirstAI = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex ${isUser ? 'justify-start' : 'justify-end'} items-start space-x-2`;
+            
+            if (isUser) {
+                // ユーザーアバター
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center mt-1';
+                avatarDiv.innerHTML = `
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                `;
+                messageDiv.appendChild(avatarDiv);
+            }
+            
+            const bubbleDiv = document.createElement('div');
+            let bubbleClass = '';
+            if (isUser) {
+                bubbleClass = 'bg-gray-600';
+            } else if (isFirstAI) {
+                bubbleClass = 'chat-bubble-ai-first';
+            } else {
+                bubbleClass = 'chat-bubble-ai';
+            }
+            bubbleDiv.className = `${bubbleClass} rounded-2xl ${isUser ? 'rounded-bl-sm' : 'rounded-br-sm'} px-4 py-3 max-w-[80%] text-white`;
+            bubbleDiv.innerHTML = `<p class="text-sm">${content}</p>`;
+            
+            messageDiv.appendChild(bubbleDiv);
+            
+            if (!isUser) {
+                // AIアバター
+                const aiAvatarDiv = document.createElement('div');
+                aiAvatarDiv.className = 'flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center mt-1';
+                aiAvatarDiv.innerHTML = `
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                `;
+                messageDiv.appendChild(aiAvatarDiv);
+            }
+            
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // 待機エフェクトを追加
+        function showWaitingEffect() {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex justify-end items-start space-x-2';
+            messageDiv.id = 'waiting-effect';
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'chat-bubble-ai-first rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] text-white';
+            bubbleDiv.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <svg class="w-4 h-4 loading-spinner" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    <span class="text-sm">分析...</span>
+                </div>
+            `;
+            
+            messageDiv.appendChild(bubbleDiv);
+            
+            // AIアバター
+            const aiAvatarDiv = document.createElement('div');
+            aiAvatarDiv.className = 'flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center mt-1';
+            aiAvatarDiv.innerHTML = `
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+            `;
+            messageDiv.appendChild(aiAvatarDiv);
+            
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // 待機エフェクトを削除
+        function removeWaitingEffect() {
+            const waitingEffect = document.getElementById('waiting-effect');
+            if (waitingEffect) {
+                waitingEffect.remove();
+            }
+        }
+
+        // 初回マーケティングカードメッセージを追加
+        function addFirstMarketingMessage(content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex justify-end items-start space-x-2';
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'marketing-card rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] border-2 border-green-400';
+            bubbleDiv.innerHTML = `
+                <div class="flex items-center mb-2">
+                    <svg class="w-4 h-4 mr-2 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <span class="text-xs font-bold text-white">LINE 公式アカウント</span>
+                </div>
+                <p class="text-sm font-medium text-white mb-3">${content}</p>
+                <div class="flex flex-wrap gap-1 mb-3">
+                    <span class="bg-white/20 text-white text-xs px-2 py-1 rounded-full">📈 限定投資レポート</span>
+                    <span class="bg-white/20 text-white text-xs px-2 py-1 rounded-full">💡 専門家分析</span>
+                </div>
+                <div class="text-center mb-3">
+                    <div class="bg-yellow-400 text-black font-bold text-sm py-2 px-4 rounded-lg inline-block mb-2 breathe-animation">
+                        🔥 この株式レポートは8,324人が取得しています
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button onclick="h2()" class="breathe-animation inline-block bg-white hover:bg-gray-100 text-green-600 font-bold py-2 px-4 rounded-lg text-sm transition-colors">
+                        今すぐ取得
+                    </button>
+                </div>
+            `;
+            
+            messageDiv.appendChild(bubbleDiv);
+            
+            // AIアバター
+            const aiAvatarDiv = document.createElement('div');
+            aiAvatarDiv.className = 'flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center mt-1';
+            aiAvatarDiv.innerHTML = `
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+            `;
+            messageDiv.appendChild(aiAvatarDiv);
+            
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // 専門家連絡マーケティングカードメッセージを追加
+        function addExpertMarketingMessage(content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex justify-end items-start space-x-2';
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'marketing-card rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] border-2 border-green-400';
+            bubbleDiv.innerHTML = `
+                <div class="flex items-center mb-2">
+                    <svg class="w-4 h-4 mr-2 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <span class="text-xs font-bold text-white">LINE 公式アカウント</span>
+                </div>
+                <p class="text-sm font-medium text-white mb-3">${content}</p>
+                <div class="text-center">
+                    <button onclick="h2()" class="breathe-animation inline-block bg-white hover:bg-gray-100 text-green-600 font-bold py-2 px-4 rounded-lg text-sm transition-colors">
+                        LINEを追加
+                    </button>
+                </div>
+            `;
+            
+            messageDiv.appendChild(bubbleDiv);
+            
+            // AIアバター
+            const aiAvatarDiv = document.createElement('div');
+            aiAvatarDiv.className = 'flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center mt-1';
+            aiAvatarDiv.innerHTML = `
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+            `;
+            messageDiv.appendChild(aiAvatarDiv);
+            
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // タイピングインジケーターを表示
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'flex justify-end items-start space-x-2';
+            typingDiv.id = 'typing-indicator';
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'bg-gray-600 rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%]';
+            bubbleDiv.innerHTML = '<div class="typing-indicator flex space-x-1"><div class="w-2 h-2 bg-gray-400 rounded-full"></div><div class="w-2 h-2 bg-gray-400 rounded-full"></div><div class="w-2 h-2 bg-gray-400 rounded-full"></div></div>';
+            
+            typingDiv.appendChild(bubbleDiv);
+            
+            // AIアバター
+            const aiAvatarDiv = document.createElement('div');
+            aiAvatarDiv.className = 'flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center mt-1';
+            aiAvatarDiv.innerHTML = `
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+            `;
+            typingDiv.appendChild(aiAvatarDiv);
+            
+            chatArea.appendChild(typingDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        // タイピングインジケーターを削除
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // AI自動応答
+        function aiAutoResponse() {
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                removeTypingIndicator();
+                
+                if (messageCount === 1) {
+                    // 初回応答
+                    addMessage('AIが株式分析を実行しています', false, true);
+                    
+                    // 待機エフェクトを表示
+                    showWaitingEffect();
+                    
+                    setTimeout(() => {
+                        removeWaitingEffect();
+                        addFirstMarketingMessage('リアルタイム株価情報と専門家分析を取得するには、下のボタンをクリックしてください。');
+                    }, 2000);
+                } else {
+                    // 2回目以降の応答
+                    addMessage('他にご質問がございましたら、株式分析専門家にお問い合わせください', false, true);
+                    
+                    setTimeout(() => {
+                        addExpertMarketingMessage('専門家のLINEアカウントを追加して、無料株式診断を受けてください');
+                    }, 1000);
+                }
+            }, 1000);
+        }
+
+        // メッセージ送信
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message) {
+                messageCount++;
+                addMessage(message, true);
+                chatInput.value = '';
+                aiAutoResponse();
+            }
+        }
+
+        // イベントリスナー
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // モーダル外クリックで閉じる
+        chatModal.addEventListener('click', (e) => {
+            if (e.target === chatModal) {
+                chatModal.classList.add('hidden');
+                chatArea.innerHTML = '';
+                messageCount = 0;
+            }
+        });
+    </script>
+</body>
+</html>
