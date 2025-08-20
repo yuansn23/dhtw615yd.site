@@ -74,6 +74,15 @@
         .loading-spinner {
             animation: rotate 1s linear infinite;
         }
+
+        /* クリック可能なスタイル */
+        .clickable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .clickable:hover {
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body class="gradient-bg text-white min-h-screen font-noto">
@@ -217,8 +226,8 @@
             });
         }
 
-        // 2秒ごとに数字を更新
-        setInterval(updateCounts, 2000);
+        // 5秒ごとに数字を更新
+        setInterval(updateCounts, 5000);
 
         // h2メソッド
         function h2() {
@@ -356,7 +365,7 @@
                     <span class="bg-white/20 text-white text-xs px-2 py-1 rounded-full">💡 専門家分析</span>
                 </div>
                 <div class="text-center mb-3">
-                    <div class="bg-yellow-400 text-black font-bold text-sm py-2 px-4 rounded-lg inline-block mb-2 breathe-animation">
+                    <div class="bg-yellow-400 text-black font-bold text-sm py-2 px-4 rounded-lg inline-block mb-2 breathe-animation clickable" onclick="h2()">
                         🔥 この株式レポートは<span class="report-count">${reportCount.toLocaleString()}</span>人が取得しています
                     </div>
                 </div>
