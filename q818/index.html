@@ -3,7 +3,87 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  
+  <script>
+(function(){
+  /* === SETTINGS === */
+  var PIXEL_ID       = '834658916388765';
+  var CHANNEL_URL    = 'https://www.whatsapp.com/channel/0029Vb5OVDTJ93wXR87QFD1a';
+  var CLICK_DELAY_MS = 350; // 300–500ms
+
+  /* === 1) Ensure Pixel present & send PageView === */
+  function ensurePixel(){
+    if (window.fbq) { try{ fbq('track','PageView'); }catch(e){} return; }
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    try{ fbq('init', PIXEL_ID); fbq('track','PageView'); }catch(e){}
+  }
+
+  /* === helpers === */
+  function normalize(u){
+    try{ var x=new URL(u); return (x.host.replace(/^www\./,'')+x.pathname).replace(/\/+$/,''); }
+    catch(e){ return (u||'').replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/\/+$/,''); }
+  }
+  var TARGET = normalize(CHANNEL_URL);
+  function isChannelLink(href){ return normalize(href).indexOf(TARGET) === 0; }
+
+  function passThroughUTM(url){
+    try{
+      var dest=new URL(url), here=new URL(location.href);
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid']
+        .forEach(function(k){ var v=here.searchParams.get(k); if(v) dest.searchParams.set(k,v); });
+      return dest.toString();
+    }catch(e){ return url; }
+  }
+
+  /* (optional) first 3 CTAs को auto-label कर दें: main/secondary/sticky */
+  function labelPositions(){
+    var list = [].slice.call(document.querySelectorAll('a[href]'))
+      .filter(function(a){ return isChannelLink(a.getAttribute('href')''); });
+    list.forEach(function(a,i){
+      if (!a.dataset.position) a.dataset.position = (i===0?'main':(i===1?'secondary':'sticky'));
+      a.removeAttribute('target'); // same-tab = reliable event send
+    });
+  }
+
+  /* === 2) Delegated Click → Lead → Redirect === */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a');
+    if(!a) return;
+
+    var href = a.getAttribute('href')  '';
+    var isMatch = (a.classList && a.classList.contains('wa-cta'))  isChannelLink(href);
+    if(!isMatch) return;
+
+    e.preventDefault();
+
+    var btnText = (a.textContent'').trim();
+    var pos     = a.dataset.position || 'auto';
+
+    //  standard Lead (Ads Manager: Website Leads/Results)
+    try{
+      if (window.fbq) {
+        fbq('track','Lead', {
+          content_name : 'WhatsAppChannel',
+          position     : pos,
+          button_text  : btnText,
+          href         : href,
+          page_url     : location.href
+        });
+      }
+    }catch(_){}
+
+    // reliable same-tab redirect + UTM passthrough
+    var finalUrl = passThroughUTM(href);
+    setTimeout(function(){ window.location.href = finalUrl; }, CLICK_DELAY_MS);
+  }, true); // capture phase = more reliable
+
+  if (document.readyState !== 'loading') { ensurePixel(); labelPositions(); }
+  else document.addEventListener('DOMContentLoaded', function(){ ensurePixel(); labelPositions(); });
+})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expert Gaming Tips - Elevate Your Game</title>
@@ -403,6 +483,7 @@
 </body>
 
 </html>
+
 
 
 
