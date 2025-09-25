@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// 显示弹窗的函数
+function showWhatsAppModal() {
+    document.getElementById('whatsappModal').classList.add('show');
+    document.body.style.overflow = 'hidden'; // 防止背景滚动
+}
+
+// 关闭弹窗的函数
+function closeModal() {
+    document.getElementById('whatsappModal').classList.remove('show');
+    document.body.style.overflow = 'auto'; // 恢复滚动
+}
+
+// 确认并跳转的函数
+function proceedToWhatsApp() {
+    closeModal();
+    // 延迟一点时间让弹窗关闭动画完成
+    setTimeout(() => {
+        window.open('https://www.qq.com', '_blank');
+    }, 300);
+}
+
+// 点击遮罩层关闭弹窗
+document.addEventListener('click', function(e) {
+    if (e.target.id === 'whatsappModal') {
+        closeModal();
+    }
+});
+
+// 修改原有的yyt函数，改为显示弹窗
+function yyt() {
+    showWhatsAppModal();
+}
+
+// ESC键关闭弹窗
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+</script>
+
+<style>
+/* 弹窗样式 */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.4s ease;
+    position: relative;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 20px 20px 0 0;
+}
+
+.whatsapp-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.modal-header h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.modal-body {
+    padding: 2rem;
+    text-align: center;
+}
+
+.success-message {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.security-features {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+    border: 2px solid #e8f5e8;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.feature-item:last-child {
+    margin-bottom: 0;
+}
+
+.check-icon {
+    color: #25D366;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 0.8rem;
+    flex-shrink: 0;
+}
+
+.modal-footer {
+    padding: 1.5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.whatsapp-btn {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.cancel-btn {
+    background: transparent;
+    color: #666;
+    border: 2px solid #ddd;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: #f5f5f5;
+    border-color: #bbb;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .modal-header {
+        padding: 1.5rem;
+    }
+    
+    .whatsapp-icon {
+        font-size: 2.5rem;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+    }
+    
+    .modal-footer {
+        padding: 1rem 1.5rem 1.5rem;
+    }
+}
+</style>
+
+
+<script>
+ function ott() {
+           // window.open('https://wa.me/', '_blank');
+		   showWhatsAppModal();
+        }
+
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Savita Subramanian - AI-Driven Market Analysis</title>
+    <link rel="stylesheet" href="css/k9.css"> 
+</head>
+<body>
+<!-- 弹窗HTML结构（添加到body底部） -->
+<div id="whatsappModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header"> 
+            <h3>Congratulations!</h3>
+        </div>
+        <div class="modal-body">
+            <p class="success-message">You have successfully secured your spot. Please click below to contact us via WhatsApp.</p>
+            <div class="security-features">
+                <div class="feature-item">
+                    <span class="check-icon">✓</span>
+                    <span>Secure Official WhatsApp Account</span>
+                </div>
+                <div class="feature-item">
+                    <span class="check-icon">✓</span>
+                    <span>Personal Information Protected by Our Privacy Policy</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="whatsapp-btn" onclick="proceedToWhatsApp()">Confirm & Contact WhatsApp</button>
+            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Hero Section -->
+    <section class="hero-banner">
+        <div class="page-wrapper">
+            <div class="hero-layout">
+                <div class="hero-content">
+                    <div class="urgency-alert">🚀 LIMITED TIME: Free AI Market Analysis</div>
+                    <h1>AI-Driven Investment Insights</h1>
+                    <p>On Wall Street, many believe in "high risk, high return," but Savita Subramanian has pioneered a different path through quantitative analysis and AI technology. As Head of US Equity & Quantitative Strategy at Bank of America, she provides unique market insights through AI-powered analysis.</p>
+                    
+                    <div class="countdown-container">
+                        <div class="countdown-title">⏰ Last 2 Days - Only 50 Spots Remaining</div>
+                        <div class="countdown-timer">
+                            <div class="timer-unit">
+                                <span class="timer-number" id="days">01</span>
+                                <span class="timer-label">Days</span>
+                            </div>
+                            <div class="timer-unit">
+                                <span class="timer-number" id="hours">23</span>
+                                <span class="timer-label">Hours</span>
+                            </div>
+                            <div class="timer-unit">
+                                <span class="timer-number" id="minutes">59</span>
+                                <span class="timer-label">Minutes</span>
+                            </div>
+                            <div class="timer-unit">
+                                <span class="timer-number" id="seconds">59</span>
+                                <span class="timer-label">Seconds</span>
+                            </div>
+                        </div>
+                        <p style="color: var(--warning-red); font-weight: bold;">Daily 9 AM ET: Free access to 1-2 potential stock recommendations</p>
+                    </div>
+
+                    <button class="action-button" onclick="ott()">Get Latest Analysis</button>
+                </div>
+                <div class="hero-visual">
+                    <img src="img/1.webp" alt="AI Market Analysis">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content-section">
+        <div class="page-wrapper">
+            <div class="section-title">
+                <h2>Savita Subramanian</h2>
+                <p>Head of US Equity & Quantitative Strategy at Bank of America</p>
+            </div>
+            <div class="content-layout">
+                <div class="content-text">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 1rem;">Educational Background:</h3>
+                    <p>University of California, Berkeley - Double degree in Economics and English</p>
+                    <p>Previously worked at Goldman Sachs, later joined Bank of America Merrill Lynch (now Bank of America)</p>
+                    
+                    <div class="highlight-box">
+                        <h3>🎓 Expert Credentials</h3>
+                        <p>Leading quantitative strategist with decades of Wall Street experience combining traditional analysis with cutting-edge AI technology</p>
+                    </div>
+                </div>
+                <div class="content-visual">
+                    <img src="img/2.webp" alt="Savita Subramanian">
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button class="action-button" onclick="ott()">Join Our Community</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="content-section">
+        <div class="page-wrapper">
+            <div class="section-title">
+                <h2>What Savita's Team Provides</h2>
+                <p>Comprehensive market analysis powered by AI technology</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>Market Forecasting</h3>
+                    <p>Daily 9 AM ET market predictions combining AI analysis with 1-2 potential stock recommendations to help you identify investment opportunities.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Quantitative Models</h3>
+                    <p>Multi-factor quantitative investment models using AI analysis to enhance investment strategy effectiveness.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Style Rotation Analysis</h3>
+                    <p>AI-powered data analysis of value vs growth stock performance to optimize your investment portfolio.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Strategy Research</h3>
+                    <p>Comprehensive reports on S&P 500 targets, sector allocation, and strategic insights combined with AI analysis for informed decision-making.</p>
+                </div>
+            </div>
+            <div class="testimonial-section">
+                <div class="testimonial-content">"Savita's team has significant influence among fund managers and institutional investors, frequently cited by The Wall Street Journal, Bloomberg, and CNBC."</div>
+                <div class="testimonial-source">- Financial Media Recognition</div>
+            </div>
+            <div style="text-align: center;">
+                <button class="action-button" onclick="ott()">Access Our Analysis</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Philosophy Section -->
+    <section class="content-section">
+        <div class="page-wrapper">
+            <div class="section-title">
+                <h2>Investment Philosophy</h2>
+                <p>Data-driven macro analysis with AI enhancement</p>
+            </div>
+            <div class="content-layout">
+                <div class="content-visual">
+                    <img src="img/3.webp" alt="Investment Analysis">
+                </div>
+                <div class="content-text">
+                    <p>Savita excels in quantitative data-driven macro analysis, emphasizing:</p>
+                    <ul style="margin: 1.5rem 0; padding-left: 2rem;">
+                        <li><strong>Earnings Cycles:</strong> Using data and AI to analyze the impact of earnings cycles on markets</li>
+                        <li><strong>Inflation & Interest Rates:</strong> Research on inflation and interest rate effects on equity markets with real-time AI data insights</li>
+                        <li><strong>Sector Valuation:</strong> AI technology matching sector valuations with profitability capabilities</li>
+                    </ul>
+                    <p>Her predictive stance sometimes leans "hawkish," especially when market valuations are elevated or macro risks are rising.</p>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button class="action-button" onclick="ott()">Join Our Team</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Influence Section -->
+    <section class="content-section">
+        <div class="page-wrapper">
+            <div class="section-title">
+                <h2>Media Influence & Recognition</h2>
+                <p>Trusted voice in financial media and investment community</p>
+            </div>
+            <div class="content-text" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p>Savita is frequently invited to comment on CNBC, Bloomberg TV, and Barron's, and is viewed by investors as a market trend observer. She has long focused on "high-quality stocks," "earnings stability," and "shareholder returns," combining AI tools to enhance investment analysis depth and building a solid reputation.</p>
+            </div>
+            <div class="media-logos">
+                <div class="media-item">CNBC</div>
+                <div class="media-item">Bloomberg TV</div>
+                <div class="media-item">Barron's</div>
+                <div class="media-item">Wall Street Journal</div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="action-button" onclick="ott()">Get Market Updates</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="content-section" style="background: var(--primary-navy); color: var(--pure-white);">
+        <div class="page-wrapper">
+            <div class="section-title" style="color: var(--pure-white);">
+                <h2 style="color: var(--accent-amber);">Take Action Now!</h2>
+                <p style="color: var(--pure-white);">Don't miss this opportunity for expert market insights</p>
+            </div>
+            <div class="highlight-box" style="background: var(--accent-amber); color: var(--background-dark); font-size: 1.3rem;">
+                <h3>🎯 IMMEDIATE ACTION REQUIRED!</h3>
+                <p>Daily 9 AM ET: Free limited-time access to 1-2 potential stock recommendations, combined with AI analysis technology to help you seize the best market opportunities.</p>
+            </div>
+            <div style="text-align: center;">
+                <button class="action-button" onclick="ott()">Secure Your Spot Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Disclosure Section -->
+    <section class="risk-disclosure">
+        <div class="page-wrapper">
+            <div class="disclosure-content">
+                <h3>Important Risk Disclosure</h3>
+                <ul class="risk-points">
+                    <li>This service only provides general market information and does not constitute any investment advice or recommendations.</li>
+                    <li>Financial markets involve risks, and you may lose some or all of your investment principal.</li>
+                    <li>All examples shown are historical data analysis and do not constitute any guarantee of future returns.</li>
+                    <li>Investors should make careful decisions based on their own risk tolerance.</li>
+                    <li>All information presented is objective factual statement and does not constitute investment advice.</li>
+                </ul>
+                <div class="footer-navigation">
+                    <a href="privacy.html" target="_blank">Privacy Policy</a>
+                    <a href="terms.html" target="_blank">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Button -->
+    <button class="floating-cta" onclick="ott()">Get Free Analysis</button>
+
+    <script>
+       
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const targetDate = now + (2 * 24 * 60 * 60 * 1000); // 2 days from now
+            
+            const interval = setInterval(function() {
+                const currentTime = new Date().getTime();
+                const distance = targetDate - currentTime;
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').innerHTML = String(days).padStart(2, '0');
+                document.getElementById('hours').innerHTML = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerHTML = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerHTML = String(seconds).padStart(2, '0');
+                
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.querySelector('.countdown-container').innerHTML = '<div style="color: var(--warning-red); font-weight: bold; font-size: 1.2rem;">⚠️ OFFER EXPIRED - Contact us for availability</div>';
+                }
+            }, 1000);
+        }
+
+        // Initialize countdown
+        updateCountdown();
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        window.addEventListener('scroll', function() {
+            const serviceItems = document.querySelectorAll('.service-item');
+            serviceItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const itemVisible = 150;
+                
+                if (itemTop < window.innerHeight - itemVisible) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceItems = document.querySelectorAll('.service-item');
+            serviceItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+        });
+    </script>
+</body>
+</html>
